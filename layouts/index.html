@@ -1,13 +1,11 @@
 {{ partial "header.html" . }}
+{{ $paginator := .Paginate (where .Data.Pages "Type" "posts") 10 }}
 <div class="article-list">
-  {{ range $index, $page := where .Data.Pages "Type" "posts" }}
-    {{ if ne $index 0 }}
-      <div class="delimiter"></div>
-    {{ end }}
+  {{ range $paginator.Pages }}
     {{ .Render "li" }}
   {{ end }}
 </div>
-{{ if (not (eq nil .Paginator)) }}
-  {{ partial "pagination.html" .Paginator }}
+{{ if (not (eq nil $paginator)) }}
+  {{ partial "pagination.html" $paginator }}
 {{ end }}
 {{ partial "footer.html" . }}
