@@ -71,35 +71,37 @@
           </div>
         </section>
       {{ end }}
-    <div class="delimiter"></div>
-    <div class="pager-container">
-      {{ if .Next }}
-        <a class="btn btn-primary btn-older-posts" href="{{ .Next.Permalink }}">
-          <div>
-            <span aria-hidden="true">&larr;</span> {{ i18n "olderPosts" }}
+      {{ if eq .Type "posts" }}
+      <div class="delimiter"></div>
+      <div class="pager-container">
+        {{ if .PrevPage }}
+          <a class="btn btn-primary btn-older-posts" href="{{ .PrevPage.Permalink }}">
+            <div>
+              <span aria-hidden="true">&larr;</span> {{ i18n "olderPosts" }}
+            </div>
+          </a>
+        {{ else }}
+        <div class="btn btn-primary btn-older-posts disable" style="color:gray;border-color: gray;">
+            <div>
+              <span aria-hidden="true">&larr;</span> {{ i18n "olderPosts" }}
+            </div>
           </div>
-        </a>
-      {{ else }}
-        <a class="btn btn-primary btn-older-posts disabled" href="#">
-          <div>
-            <span aria-hidden="true">&larr;</span> {{ i18n "olderPosts" }}
+        {{ end }}
+        {{ if .NextPage }}
+          <a class="btn btn-primary btn-newer-posts" href="{{ .NextPage.Permalink }}">
+            <div>
+              {{ i18n "newerPosts" }} <span aria-hidden="true">&rarr;</span>
+            </div>
+          </a>
+        {{ else }}
+        <div class="btn btn-primary btn-newer-posts disable" style="color:gray;border-color: gray;">
+            <div>
+              {{ i18n "newerPosts" }} <span aria-hidden="true">&rarr;</span>
+            </div>
           </div>
-        </a>
-      {{ end }}
-      {{ if .Prev }}
-        <a class="btn btn-primary btn-newer-posts" href="{{ .Prev.Permalink }}">
-          <div>
-            {{ i18n "newerPosts" }} <span aria-hidden="true">&rarr;</span>
-          </div>
-        </a>
-      {{ else }}
-        <a class="btn btn-primary btn-newer-posts disabled" href="#">
-          <div>
-            {{ i18n "newerPosts" }} <span aria-hidden="true">&rarr;</span>
-          </div>
-        </a>
-      {{ end }}
-    </div>
+        {{ end }}
+      </div>
+      {{end}}
   </footer>
 </article>
 <div class="delimiter"></div>
